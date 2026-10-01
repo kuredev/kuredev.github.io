@@ -1,13 +1,13 @@
 export const site = {
-  name: "Kurebayashi",
-  role: "Software Engineer",
-  bio: "ソフトウェアエンジニアです。作ったものと書いたものをここにまとめています。",
+  name: "kuredev(Akira Kurebayashi)",
+  role: "InfraEngineer & Software Engineer",
+  bio: "インフラエンジニア & ソフトウェアエンジニアです。作ったものと書いたものをここにまとめています。",
   githubUser: "kuredev",
-  qiitaUser: "",
-  zennUser: "",
+  qiitaUser: "kure",
+  zennUser: "kuredev",
   links: [
     { label: "GitHub", href: "https://github.com/kuredev" },
-    { label: "Qiita", href: "" },
-    { label: "Zenn", href: "" },
+    { label: "Qiita", href: "https://qiita.com/kure" },
+    { label: "Zenn", href: "https://zenn.dev/kuredev" },
   ],
 };
