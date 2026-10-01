@@ -1,0 +1,161 @@
+:root {
+  --bg: #f3eee4;
+  --ink: #1f1a16;
+  --muted: #6d645c;
+  --line: #d9d0c4;
+  --accent: #9a3412;
+  --card: rgba(255, 252, 247, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, #fff8ec 0, transparent 42%),
+    var(--bg);
+  font-family: "IBM Plex Sans JP", sans-serif;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+}
+
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.top {
+  display: grid;
+  gap: 18px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--line);
+}
+
+.kicker {
+  margin: 0;
+  color: var(--accent);
+  letter-spacing: 0.16em;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Shippori Mincho", serif;
+  font-size: clamp(40px, 7vw, 72px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+.role,
+.bio {
+  margin: 0;
+  max-width: 42rem;
+}
+
+.role {
+  color: var(--muted);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  padding: 0;
+  margin: 8px 0 0;
+  list-style: none;
+}
+
+.links a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+nav {
+  display: flex;
+  gap: 16px;
+  padding: 18px 0 40px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: var(--ink);
+}
+
+section {
+  margin-bottom: 48px;
+}
+
+h2 {
+  margin: 0 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.list li {
+  border-bottom: 1px solid var(--line);
+}
+
+.list a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 16px;
+  padding: 14px 0;
+  text-decoration: none;
+}
+
+.list a:hover .title {
+  color: var(--accent);
+}
+
+.title {
+  font-weight: 500;
+}
+
+.meta,
+.empty {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.empty {
+  margin: 0;
+}
+
+footer {
+  padding-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 700px) {
+  .list a {
+    grid-template-columns: 1fr;
+  }
+}
