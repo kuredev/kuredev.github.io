@@ -3,6 +3,7 @@ export const site = {
   role: "InfraEngineer & Software Engineer",
   bio: "インフラエンジニア & ソフトウェアエンジニアです。作ったものと書いたものをここにまとめています。",
   githubUser: "kuredev",
+  githubRepos: [], // Works に載せるリポジトリ名（ここに書いたものだけ表示）
   qiitaUser: "kure",
   zennUser: "kuredev",
   hatenaBlog: "https://kure.hatenablog.jp",

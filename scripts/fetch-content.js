@@ -59,22 +59,19 @@ function parseFeed(xml) {
 }
 
 async function fetchGithub() {
-  if (!site.githubUser) return [];
-  const repos = await getJson(
-    `https://api.github.com/users/${site.githubUser}/repos?sort=updated&per_page=100`,
+  const names = site.githubRepos ?? [];
+  if (!site.githubUser || !names.length) return [];
+  const repos = await Promise.all(
+    names.map((name) => getJson(`https://api.github.com/repos/${site.githubUser}/${name}`)),
   );
-  return repos
-    .filter((repo) => !repo.fork && !repo.archived)
-    .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at))
-    .slice(0, 8)
-    .map((repo) => ({
-      name: repo.name,
-      description: repo.description,
-      url: repo.html_url,
-      language: repo.language,
-      stars: repo.stargazers_count,
-      updatedAt: repo.pushed_at,
-    }));
+  return repos.map((repo) => ({
+    name: repo.name,
+    description: repo.description,
+    url: repo.html_url,
+    language: repo.language,
+    stars: repo.stargazers_count,
+    updatedAt: repo.pushed_at,
+  }));
 }
 
 async function fetchQiita() {
@@ -124,6 +121,26 @@ async function fetchHatena() {
   throw lastError;
 }
 
+async function fetchOgImage(url) {
+  try {
+    const res = await fetch(url, {
+      headers: { "User-Agent": "portfolio-build" },
+      signal: AbortSignal.timeout(10000),
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+    const tags = html.match(/<meta\b[^>]*>/gi) ?? [];
+    for (const meta of tags) {
+      if (!/(?:property|name)=["']og:image["']/i.test(meta)) continue;
+      const value = meta.match(/content=["']([^"']+)["']/i)?.[1];
+      if (value) return decodeXml(value);
+    }
+  } catch (error) {
+    console.warn(`og:image fetch failed: ${url}`, error.message);
+  }
+  return null;
+}
+
 export async function fetchContent() {
   const results = await Promise.allSettled([
     fetchGithub(),
@@ -138,10 +155,13 @@ export async function fetchContent() {
     return [];
   });
 
-  const articles = [...qiita, ...zenn, ...hatena]
+  const latest = [...qiita, ...zenn, ...hatena]
     .filter((item) => item.title && item.url)
     .sort((a, b) => new Date(b.publishedAt ?? 0) - new Date(a.publishedAt ?? 0))
-    .slice(0, 12);
+    .slice(0, 5);
+  const articles = await Promise.all(
+    latest.map(async (item) => ({ ...item, image: await fetchOgImage(item.url) })),
+  );
 
   const content = {
     generatedAt: new Date().toISOString(),

@@ -58,6 +58,25 @@ function list(items, href, title, meta) {
     .join("")}</ul>`;
 }
 
+function cards(items) {
+  return `<ul class="cards">${items
+    .map(
+      (item) => `
+        <li>
+          <a href="${escapeHtml(item.url)}" rel="noreferrer">
+            ${
+              item.image
+                ? `<img src="${escapeHtml(item.image)}" alt="" loading="lazy" />`
+                : `<div class="thumb-empty"></div>`
+            }
+            <span class="title">${escapeHtml(item.title)}</span>
+            <span class="meta">${escapeHtml(articleMeta(item))}</span>
+          </a>
+        </li>`,
+    )
+    .join("")}</ul>`;
+}
+
 document.querySelector("#app").innerHTML = `
   <main class="page">
     <header class="top">
@@ -92,7 +111,7 @@ document.querySelector("#app").innerHTML = `
     </section>
     <section id="articles">
       <h2>ARTICLES</h2>
-      ${list(content.articles, (article) => article.url, (article) => article.title, articleMeta)}
+      ${content.articles.length ? cards(content.articles) : `<p class="empty">まだありません。</p>`}
     </section>
     ${
       site.activities?.length

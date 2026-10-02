@@ -25,5 +25,6 @@ GitHub Pages 向けの静的ポートフォリオ（Vite、フレームワーク
 
 ## 注意点
 
-- 記事は Qiita / Zenn / Hatena を日付の降順でマージして上位 12 件。リポジトリは fork と archived を除き、push 日時順で上位 8 件。
+- 記事は Qiita / Zenn / Hatena を日付の降順でマージして上位 5 件。
+- Works には、`site.software`（手動）と `site.githubRepos`（リポジトリ名を指定したものだけ GitHub API から取得）が載る。リポジトリの自動列挙はしない。
 - `site.hatenaBlog` は `fetchHatena` 内で URL の origin として扱われる（`${origin}/rss`）。ブログの完全な URL（例: `https://kure.hatenablog.jp/`）を設定する必要があり、ユーザー名だけでは動かない。
