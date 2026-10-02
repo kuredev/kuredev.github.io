@@ -99,16 +99,46 @@ async function fetchZenn() {
   }));
 }
 
+function hatenaFeedUrls() {
+  if (!site.hatenaBlog) return [];
+  const origin = site.hatenaBlog.replace(/\/+$/, "");
+  return [`${origin}/rss`, `${origin}/feed`];
+}
+
+async function fetchHatena() {
+  const urls = hatenaFeedUrls();
+  if (!urls.length) return [];
+
+  let lastError;
+  for (const url of urls) {
+    try {
+      const xml = await getText(url);
+      return parseFeed(xml).map((item) => ({
+        ...item,
+        source: "Hatena",
+      }));
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError;
+}
+
 export async function fetchContent() {
-  const results = await Promise.allSettled([fetchGithub(), fetchQiita(), fetchZenn()]);
-  const [repos, qiita, zenn] = results.map((result, index) => {
+  const results = await Promise.allSettled([
+    fetchGithub(),
+    fetchQiita(),
+    fetchZenn(),
+    fetchHatena(),
+  ]);
+  const [repos, qiita, zenn, hatena] = results.map((result, index) => {
     if (result.status === "fulfilled") return result.value;
-    const labels = ["GitHub", "Qiita", "Zenn"];
+    const labels = ["GitHub", "Qiita", "Zenn", "Hatena"];
     console.warn(`${labels[index]} fetch failed:`, result.reason.message);
     return [];
   });
 
-  const articles = [...qiita, ...zenn]
+  const articles = [...qiita, ...zenn, ...hatena]
     .filter((item) => item.title && item.url)
     .sort((a, b) => new Date(b.publishedAt ?? 0) - new Date(a.publishedAt ?? 0))
     .slice(0, 12);

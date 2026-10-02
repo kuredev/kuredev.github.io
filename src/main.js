@@ -31,6 +31,10 @@ function articleMeta(article) {
   return [article.source, formatDate(article.publishedAt)].filter(Boolean).join("  ·  ");
 }
 
+function activityMeta(activity) {
+  return [activity.event, activity.award].filter(Boolean).join("  ·  ");
+}
+
 function list(items, href, title, meta) {
   if (!items.length) {
     return `<p class="empty">まだありません。src/config.js にユーザー名を入れると、ビルド時に取得します。</p>`;
@@ -69,6 +73,7 @@ document.querySelector("#app").innerHTML = `
     <nav>
       <a href="#works">Works</a>
       <a href="#articles">Articles</a>
+      <a href="#activities">Activities</a>
     </nav>
     <section id="works">
       <h2>WORKS</h2>
@@ -78,6 +83,14 @@ document.querySelector("#app").innerHTML = `
       <h2>ARTICLES</h2>
       ${list(content.articles, (article) => article.url, (article) => article.title, articleMeta)}
     </section>
+    ${
+      site.activities?.length
+        ? `<section id="activities">
+      <h2>ACTIVITIES</h2>
+      ${list(site.activities, (activity) => activity.href, (activity) => activity.title, activityMeta)}
+    </section>`
+        : ""
+    }
     <footer>Last built ${formatDate(content.generatedAt)}</footer>
   </main>
 `;
