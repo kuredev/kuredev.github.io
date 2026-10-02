@@ -6,6 +6,20 @@ export const site = {
   qiitaUser: "kure",
   zennUser: "kuredev",
   hatenaBlog: "https://kure.hatenablog.jp",
+  software: [
+    {
+      name: "Multi Session URL Copier",
+      href: "https://chromewebstore.google.com/detail/multi-session-url-copier/dpcjemicfokkjfkefhdnnjinbhakhhhk?hl=ja",
+      description: "AWSマネジメントコンソールでのURLをコピーするときのサニタイズツール",
+      released: "2025",
+    },
+    {
+      name: "MindClipper",
+      href: "https://www.vector.co.jp/soft/winnt/personal/se490720.html",
+      description: "日記とメモ帳の融合を目指したメモツール",
+      released: "2012",
+    },
+  ],
   activities: [
     {
       title: "microCMS MCPサーバを使って“PDF の大会要項からデータ登録まで”完全自動化してみた",

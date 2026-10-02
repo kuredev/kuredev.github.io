@@ -31,6 +31,12 @@ function articleMeta(article) {
   return [article.source, formatDate(article.publishedAt)].filter(Boolean).join("  ·  ");
 }
 
+function softwareMeta(software) {
+  return [software.description, software.released ? `公開 ${software.released}` : null]
+    .filter(Boolean)
+    .join("  ·  ");
+}
+
 function activityMeta(activity) {
   return [activity.event, activity.award].filter(Boolean).join("  ·  ");
 }
@@ -77,7 +83,12 @@ document.querySelector("#app").innerHTML = `
     </nav>
     <section id="works">
       <h2>WORKS</h2>
-      ${list(content.repos, (repo) => repo.url, (repo) => repo.name, repoMeta)}
+      ${list(
+        [...(site.software ?? []).map((item) => ({ ...item, manual: true })), ...content.repos],
+        (item) => item.href ?? item.url,
+        (item) => item.name,
+        (item) => (item.manual ? softwareMeta(item) : repoMeta(item)),
+      )}
     </section>
     <section id="articles">
       <h2>ARTICLES</h2>
