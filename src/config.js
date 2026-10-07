@@ -14,6 +14,12 @@ export const site = {
       description: "AWSマネジメントコンソールでのURLをコピーするときのサニタイズツール",
       released: "2025",
     },
+        {
+      name: "SnipClipper",
+      href: "https://zenn.dev/kuredev/articles/634c1f396b00f1",
+      description: "Windows付属の「Snipping Tool」をタスクトレイから起動する",
+      released: "2023",
+    },
     {
       name: "MindClipper",
       href: "https://www.vector.co.jp/soft/winnt/personal/se490720.html",
