@@ -114,7 +114,7 @@ document.querySelector("#app").innerHTML = `
         (item) => item.href ?? item.url,
         (item) => item.name,
         (item) => (item.manual ? softwareMeta(item) : repoMeta(item)),
-        (item) => item.image ?? content.worksImages?.[item.href ?? item.url],
+        (item) => item.image ?? content.linkImages?.[item.href ?? item.url],
       )}
     </section>
     <section id="articles">
@@ -125,7 +125,7 @@ document.querySelector("#app").innerHTML = `
       site.activities?.length
         ? `<section id="activities">
       <h2>ACTIVITIES</h2>
-      ${list(site.activities, (activity) => activity.href, (activity) => activity.title, activityMeta)}
+      ${list(site.activities, (activity) => activity.href, (activity) => activity.title, activityMeta, (activity) => activity.image ?? content.linkImages?.[activity.href])}
     </section>`
         : ""
     }

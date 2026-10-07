@@ -163,14 +163,16 @@ export async function fetchContent() {
     latest.map(async (item) => ({ ...item, image: await fetchOgImage(item.url) })),
   );
 
-  // Works 用: image 未指定の項目だけ og:image を取得する（url / href をキーにした辞書）
-  const worksUrls = [
-    ...(site.software ?? []).filter((item) => item.href && !item.image).map((item) => item.href),
+  // Works / Activities 用: image 未指定の項目だけ og:image を取得する（url / href をキーにした辞書）
+  const linkUrls = [
+    ...[...(site.software ?? []), ...(site.activities ?? [])]
+      .filter((item) => item.href && !item.image)
+      .map((item) => item.href),
     ...repos.map((repo) => repo.url),
   ];
-  const worksImages = Object.fromEntries(
+  const linkImages = Object.fromEntries(
     (
-      await Promise.all(worksUrls.map(async (url) => [url, await fetchOgImage(url)]))
+      await Promise.all(linkUrls.map(async (url) => [url, await fetchOgImage(url)]))
     ).filter(([, image]) => image),
   );
 
@@ -178,7 +180,7 @@ export async function fetchContent() {
     generatedAt: new Date().toISOString(),
     repos,
     articles,
-    worksImages,
+    linkImages,
   };
 
   await writeFile(new URL("../src/content.json", import.meta.url), `${JSON.stringify(content, null, 2)}\n`);
