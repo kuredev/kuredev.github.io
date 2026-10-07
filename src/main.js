@@ -41,7 +41,13 @@ function activityMeta(activity) {
   return [activity.event, activity.award].filter(Boolean).join("  ·  ");
 }
 
-function list(items, href, title, meta) {
+function thumb(src) {
+  return src
+    ? `<img src="${escapeHtml(src)}" alt="" loading="lazy" />`
+    : `<div class="thumb-empty"></div>`;
+}
+
+function list(items, href, title, meta, image) {
   if (!items.length) {
     return `<p class="empty">まだありません。src/config.js にユーザー名を入れると、ビルド時に取得します。</p>`;
   }
@@ -49,7 +55,8 @@ function list(items, href, title, meta) {
     .map(
       (item) => `
         <li>
-          <a href="${escapeHtml(href(item))}" target="_blank" rel="noopener noreferrer">
+          <a href="${escapeHtml(href(item))}" target="_blank" rel="noopener noreferrer"${image ? ' class="with-thumb"' : ""}>
+            ${image ? thumb(image(item)) : ""}
             <span class="title">${escapeHtml(title(item))}</span>
             <span class="meta">${escapeHtml(meta(item))}</span>
           </a>
@@ -107,6 +114,7 @@ document.querySelector("#app").innerHTML = `
         (item) => item.href ?? item.url,
         (item) => item.name,
         (item) => (item.manual ? softwareMeta(item) : repoMeta(item)),
+        (item) => item.image ?? content.worksImages?.[item.href ?? item.url],
       )}
     </section>
     <section id="articles">

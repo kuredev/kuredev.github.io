@@ -130,6 +130,20 @@ h2 {
   text-decoration: none;
 }
 
+.list a.with-thumb {
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+}
+
+.list a.with-thumb .meta {
+  grid-column: 2;
+}
+
+.list a.with-thumb img,
+.list a.with-thumb .thumb-empty {
+  grid-row: 1 / span 2;
+}
+
 .list a:hover .title {
   color: var(--accent);
 }
@@ -164,6 +178,7 @@ h2 {
 }
 
 .cards img,
+.list img,
 .thumb-empty {
   width: 100%;
   aspect-ratio: 1200 / 630;
@@ -204,5 +219,9 @@ footer {
 
   .list a {
     grid-template-columns: 1fr;
+  }
+
+  .list a.with-thumb {
+    grid-template-columns: 96px 1fr;
   }
 }
