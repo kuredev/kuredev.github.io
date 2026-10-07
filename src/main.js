@@ -49,7 +49,7 @@ function list(items, href, title, meta) {
     .map(
       (item) => `
         <li>
-          <a href="${escapeHtml(href(item))}" rel="noreferrer">
+          <a href="${escapeHtml(href(item))}" target="_blank" rel="noopener noreferrer">
             <span class="title">${escapeHtml(title(item))}</span>
             <span class="meta">${escapeHtml(meta(item))}</span>
           </a>
@@ -63,7 +63,7 @@ function cards(items) {
     .map(
       (item) => `
         <li>
-          <a href="${escapeHtml(item.url)}" rel="noreferrer">
+          <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">
             ${
               item.image
                 ? `<img src="${escapeHtml(item.image)}" alt="" loading="lazy" />`
@@ -89,7 +89,7 @@ document.querySelector("#app").innerHTML = `
           ? `<ul class="links">${links
               .map(
                 (link) =>
-                  `<li><a href="${escapeHtml(link.href)}" rel="noreferrer">${escapeHtml(link.label)}</a></li>`,
+                  `<li><a href="${escapeHtml(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a></li>`,
               )
               .join("")}</ul>`
           : ""
