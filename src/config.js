@@ -27,6 +27,12 @@ export const site = {
       released: "2023",
     },
     {
+      name: "git dansyari",
+      href: "https://qiita.com/kure/items/8a5b426bf050d248da7f",
+      description: "マージ済みのブランチを対話式で削除するgitサブコマンド",
+      released: "2022",
+    },
+    {
       name: "MindClipper",
       href: "https://www.vector.co.jp/soft/winnt/personal/se490720.html",
       description: "日記とメモ帳の融合を目指したメモツール",
