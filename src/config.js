@@ -9,6 +9,16 @@ export const site = {
   hatenaBlog: "https://kure.hatenablog.jp",
   software: [
     {
+      name: "関西卓球大会データベース",
+      href: "https://tabletennis-kansai.kuredev.de/",
+      description: "社会人向けの卓球大会を都道府県・市町村ごとに一覧で確認できるWebサービス",
+    },
+    {
+      name: "おぼえる",
+      href: "https://www.oboeru.link",
+      description: "PCでまとめて作った暗記カードを、スマホアプリで移動中に復習できる無料の単語帳サービス",
+    },
+    {
       name: "Multi Session URL Copier",
       href: "https://chromewebstore.google.com/detail/multi-session-url-copier/dpcjemicfokkjfkefhdnnjinbhakhhhk?hl=ja",
       description: "AWSマネジメントコンソールでのURLをコピーするときのサニタイズツール",
