@@ -7,7 +7,7 @@ export const site = {
   qiitaUser: "kure",
   zennUser: "kuredev",
   hatenaBlog: "https://kure.hatenablog.jp",
-  software: [
+  webApps: [
     {
       name: "関西卓球大会データベース",
       href: "https://tabletennis-kansai.kuredev.de/",
@@ -18,6 +18,8 @@ export const site = {
       href: "https://www.oboeru.link",
       description: "PCでまとめて作った暗記カードを、スマホアプリで移動中に復習できる無料の単語帳サービス",
     },
+  ],
+  software: [
     {
       name: "Multi Session URL Copier",
       href: "https://chromewebstore.google.com/detail/multi-session-url-copier/dpcjemicfokkjfkefhdnnjinbhakhhhk?hl=ja",

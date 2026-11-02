@@ -165,7 +165,7 @@ export async function fetchContent() {
 
   // Works / Activities 用: image 未指定の項目だけ og:image を取得する（url / href をキーにした辞書）
   const linkUrls = [
-    ...[...(site.software ?? []), ...(site.activities ?? [])]
+    ...[...(site.webApps ?? []), ...(site.software ?? []), ...(site.activities ?? [])]
       .filter((item) => item.href && !item.image)
       .map((item) => item.href),
     ...repos.map((repo) => repo.url),

@@ -84,6 +84,17 @@ function cards(items) {
     .join("")}</ul>`;
 }
 
+function worksGroup(heading, items = [], manual = true) {
+  if (!items.length) return "";
+  return `<h3>${escapeHtml(heading)}</h3>${list(
+    items,
+    (item) => item.href ?? item.url,
+    (item) => item.name,
+    (item) => (manual ? softwareMeta(item) : repoMeta(item)),
+    (item) => item.image ?? content.linkImages?.[item.href ?? item.url],
+  )}`;
+}
+
 document.querySelector("#app").innerHTML = `
   <main class="page">
     <header class="top">
@@ -109,13 +120,9 @@ document.querySelector("#app").innerHTML = `
     </nav>
     <section id="works">
       <h2>WORKS</h2>
-      ${list(
-        [...(site.software ?? []).map((item) => ({ ...item, manual: true })), ...content.repos],
-        (item) => item.href ?? item.url,
-        (item) => item.name,
-        (item) => (item.manual ? softwareMeta(item) : repoMeta(item)),
-        (item) => item.image ?? content.linkImages?.[item.href ?? item.url],
-      )}
+      ${worksGroup("Web", site.webApps)}
+      ${worksGroup("Software", site.software)}
+      ${content.repos.length ? worksGroup("Repositories", content.repos, false) : ""}
     </section>
     <section id="articles">
       <h2>ARTICLES</h2>
